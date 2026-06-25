@@ -1,0 +1,9 @@
+# Downloaded videos
+MP4/
+*.mp4
+*.m4a
+*.webm
+*.part
+
+# macOS
+.DS_Store
