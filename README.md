@@ -24,6 +24,9 @@ The video is saved into an `MP4/` folder created in your current directory.
 # macOS (Homebrew)
 brew install yt-dlp ffmpeg
 
+# Linux (Debian/Ubuntu)
+sudo apt install -y ffmpeg && pip install -U yt-dlp
+
 # pip (yt-dlp only — install ffmpeg separately)
 pip install -U yt-dlp
 ```
@@ -66,11 +69,12 @@ Under the hood it runs:
 
 ```bash
 mkdir -p "$(pwd)/MP4" && \
-yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" \
+yt-dlp --no-playlist -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]" \
   -o "$(pwd)/MP4/%(title)s-%(id)s.%(ext)s" \
   "<URL>"
 ```
 
+- `--no-playlist` — download only the single video, even for a playlist URL / 再生リスト URL でも単一動画のみ取得
 - `bv*[ext=mp4]+ba[ext=m4a]` — best MP4 video + best M4A audio, merged by ffmpeg / 最良の MP4 映像 + M4A 音声を ffmpeg で結合
 - `/b[ext=mp4]` — fallback to a single pre-muxed MP4 if separate streams are unavailable / 別ストリームが無い場合は結合済み MP4 にフォールバック
 - Output filename: `<title>-<id>.mp4`
